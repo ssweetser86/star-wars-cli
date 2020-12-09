@@ -2,8 +2,6 @@ require_relative '../lib/environment.rb'
 
 class API
 
-    #URL = "https://swapi.dev/api/people/"
-
     def get_data(url = "https://swapi.dev/api/people/?page=1")
         response = HTTParty.get(url)
         data = JSON.parse(response.body)
