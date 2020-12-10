@@ -1,3 +1,0 @@
-class Starship
-
-end

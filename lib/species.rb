@@ -1,3 +1,0 @@
-class Species
-
-end
