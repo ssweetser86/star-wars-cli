@@ -15,4 +15,11 @@ class Planet
         @@all
     end
 
+    def self.find_or_create_new(name, population, id)
+        self.all.each do |p|
+            return nil if p.name == name
+        end
+        self.new(name, population, id)
+    end
+
 end

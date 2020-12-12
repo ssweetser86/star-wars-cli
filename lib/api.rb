@@ -1,11 +1,9 @@
-require_relative '../lib/environment.rb'
 
 class API
 
     def initialize
-        get_data
-        complile_characters
-
+        compile_characters
+        compile_others
     end
 
     def get_data(url = "https://swapi.dev/api/people/?page=1")
@@ -27,9 +25,13 @@ class API
 
     def compile_others
         Character.all.each do |char|
-            planet = get_data(char["homeworld"])
-            Planet.find_or_create_new(planet["name"], planet["population"], char["homeworld"])
-
-
+            planet = get_data(char.homeworld)
+            Planet.find_or_create_new(planet["name"], planet["population"], char.homeworld)
+        end
+        films = get_data("https://swapi.dev/api/films/")
+        films.each do |film|
+            Film.new(film["title"], film["director"], film["opening_crawl"], film["url"])
+        end
+    end
 
 end

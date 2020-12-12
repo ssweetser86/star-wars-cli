@@ -1,3 +1,5 @@
+require_relative '../lib/environment.rb'
+
 class CLI
 
     def initialize
@@ -6,7 +8,9 @@ class CLI
 
         API.new
 
-        
+        binding.pry
     end
 
 end
+
+CLI.new
