@@ -29,7 +29,7 @@ class API
             Planet.find_or_create_new(planet["name"], planet["population"], char.homeworld)
         end
         films = get_data("https://swapi.dev/api/films/")
-        films.each do |film|
+        films["results"].each do |film|
             Film.new(film["title"], film["director"], film["opening_crawl"], film["url"])
         end
     end
