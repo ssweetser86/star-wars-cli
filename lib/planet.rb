@@ -2,15 +2,16 @@ class Planet
 
     @@all = []
 
-    attr_accessor :name, :population
+    attr_accessor :name, :population, :id
 
-    def initialize(name, population)
+    def initialize(name, population, id)
         @name = name
         @population = population
+        @id = id
         @@all << self
     end
 
-    def all
+    def self.all
         @@all
     end
 
