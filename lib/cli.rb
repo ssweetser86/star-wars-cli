@@ -50,7 +50,7 @@ class CLI
         char_menu(index+1) if choice == 'next' && index < Character.all.count / 10
         char_menu(index-1) if choice == 'previous' && index > 0
         char_menu(index) if Character.all[base+choice.to_i-1] == nil
-        view_char(Character.all[base+choice.to_i-1])
+        view_char(Character.all[choice.to_i-1])
         #binding.pry
         #for i in 0..9
         #    puts 
