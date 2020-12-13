@@ -2,12 +2,13 @@ class Planet
 
     @@all = []
 
-    attr_accessor :name, :population, :id
+    attr_accessor :name, :population, :id, :residents
 
-    def initialize(name, population, id)
+    def initialize(name, population, residents, id)
         @name = name
         @population = population
         @id = id
+        @residents = residents
         @@all << self
     end
 
@@ -15,11 +16,11 @@ class Planet
         @@all
     end
 
-    def self.find_or_create_new(name, population, id)
+    def self.find_or_create_new(name, population, residents, id)
         self.all.each do |p|
             return nil if p.name == name
         end
-        self.new(name, population, id)
+        self.new(name, population, residents, id)
     end
 
     def self.find_by_id(id)
