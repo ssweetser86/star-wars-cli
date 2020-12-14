@@ -3,37 +3,34 @@ require_relative '../lib/environment.rb'
 class CLI
 
     def initialize
+        clear_scr
         puts "Welcome to Star Wars CLI"
         puts "Please wait while your data is compiled for optimal viewing pleasure (this will take a while)..."
+        print "\n\n\nLoading "
         
         API.new
-    end
-
-    def get_input
-        x = gets.chomp
-        return x.downcase
     end
 
     def clear_scr
         system("clear") || system("cls")
     end
 
-    def call
+    def call(error=false)
         clear_scr
-        puts Character.all.count
+        puts "!!!You must enter a valid selection!!!" if error == true
         puts "Which would you like to know more about? (Type exit to quit)"
         puts "1. Characters"
         puts "2. Planets"
         puts "3. Films"
-        choice = get_input
-        while choice != "exit" do
-            return nil if choice == 'exit'
-            char_menu(0) if choice == '1'
-            planet_menu(0) if choice == '2'
-            film_menu if choice == '3'
-            puts "Please enter a valid choice."
-            choice = get_input
-        end
+        print "\n\nEnter your selection: "
+        choice = gets.chomp
+        binding.pry
+        return nil if choice.downcase == 'exit'
+        char_menu(0) if choice == '1'
+        planet_menu(0) if choice == '2'
+        film_menu if choice == '3'
+    
+        call(true)
 
     end
 
@@ -46,12 +43,12 @@ class CLI
                 puts "#{base+i+1}.  #{Character.all[base+i].name}"
             end
         end
-        choice = get_input
+        choice = gets.chomp
         call if choice == 'exit'
-        char_menu(index+1) if choice == 'next' && index < Character.all.count / 10
-        char_menu(index-1) if choice == 'previous' && index > 0
-        char_menu(index) if Character.all[base+choice.to_i-1] == nil
-        view_char(Character.all[choice.to_i-1])
+        char_menu(index+1) if choice.downcase == 'next' && index < Character.all.count / 10
+        char_menu(index-1) if choice.downcase == 'previous' && index > 0
+        view_char(Character.all[choice.to_i-1]) if (1..Character.all.count).include?(choice.to_i)
+        char_menu(index)
     end
 
     def planet_menu(index)
@@ -63,12 +60,12 @@ class CLI
                 puts "#{base+i+1}.  #{Planet.all[base+i].name}"
             end
         end
-        choice = get_input
+        choice = gets.chomp
         call if choice == 'exit'
-        planet_menu(index+1) if choice == 'next' && index < Planet.all.count / 10
-        planet_menu(index-1) if choice == 'previous' && index > 0
-        planet_menu(index) if Planet.all[base+choice.to_i-1] == nil
-        view_planet(Planet.all[choice.to_i-1])
+        planet_menu(index+1) if choice.downcase == 'next' && index < Planet.all.count / 10 - 1
+        planet_menu(index-1) if choice.downcase == 'previous' && index > 0
+        view_planet(Planet.all[choice.to_i-1]) if (1..Planet.all.count).include?(choice.to_i)
+        planet_menu(index)
     end
 
     def film_menu
@@ -77,7 +74,7 @@ class CLI
         Film.all.each.with_index(1) do | f, i |
             puts "#{i}. #{f.name}"
         end
-        choice = get_input
+        choice = gets.chomp
         view_film(Film.all[choice.to_i-1])
     end
 
