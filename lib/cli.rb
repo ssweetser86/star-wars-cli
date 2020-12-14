@@ -1,5 +1,3 @@
-require_relative '../lib/environment.rb'
-
 class CLI
 
     def initialize
@@ -7,8 +5,6 @@ class CLI
         puts "Welcome to Star Wars CLI"
         puts "Please wait while your data is compiled for optimal viewing pleasure (this will take a while)..."
         print "\n\n\nLoading "
-        
-        API.new
     end
 
     def clear_scr
@@ -24,8 +20,7 @@ class CLI
         puts "3. Films"
         print "\n\nEnter your selection: "
         choice = gets.chomp
-        binding.pry
-        return nil if choice.downcase == 'exit'
+        exit if choice.downcase == 'exit'
         char_menu(0) if choice == '1'
         planet_menu(0) if choice == '2'
         film_menu if choice == '3'
@@ -43,6 +38,7 @@ class CLI
                 puts "#{base+i+1}.  #{Character.all[base+i].name}"
             end
         end
+        print "\n\nEnter your selection: "
         choice = gets.chomp
         call if choice == 'exit'
         char_menu(index+1) if choice.downcase == 'next' && index < Character.all.count / 10
@@ -60,6 +56,7 @@ class CLI
                 puts "#{base+i+1}.  #{Planet.all[base+i].name}"
             end
         end
+        print "\n\nEnter your selection: "
         choice = gets.chomp
         call if choice == 'exit'
         planet_menu(index+1) if choice.downcase == 'next' && index < Planet.all.count / 10 - 1
@@ -74,8 +71,10 @@ class CLI
         Film.all.each.with_index(1) do | f, i |
             puts "#{i}. #{f.name}"
         end
+        print "\n\nEnter your selection: "
         choice = gets.chomp
-        view_film(Film.all[choice.to_i-1])
+        view_film(Film.all[choice.to_i-1]) if (1..Film.all.count).include?(choice.to_i)
+        film_menu
     end
 
     def view_char(char)
@@ -115,6 +114,3 @@ class CLI
     end
 
 end
-
-x = CLI.new
-x.call
