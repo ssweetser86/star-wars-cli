@@ -1,5 +1,7 @@
 class Character
 
+    extend Findable
+
     @@all = []
 
     attr_accessor :name, :dob, :homeworld, :films, :id
@@ -15,12 +17,6 @@ class Character
 
     def self.all
         @@all
-    end
-
-    def self.find_by_id(id)
-        self.all.each do |c|
-            return c.name if c.id == id
-        end
     end
 
 end

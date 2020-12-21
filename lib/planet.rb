@@ -1,5 +1,7 @@
 class Planet
 
+    extend Findable
+
     @@all = []
 
     attr_accessor :name, :population, :id, :residents
@@ -15,17 +17,5 @@ class Planet
     def self.all
         @@all
     end
-
-    # def self.find_or_create_new(name, population, residents, id)
-    #     self.all.each do |p|
-    #         return nil if p.name == name
-    #     end
-    #     self.new(name, population, residents, id)
-    # end
-
-    def self.find_by_id(id)
-        self.all.each do |p|
-            return p.name if p.id == id
-        end
-    end
+  
 end
