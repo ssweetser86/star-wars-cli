@@ -14,9 +14,10 @@ class API
 
     def compile_characters
         sw = get_data
-        #data = []
+        system("clear") || system("cls")
+        print "A long time ago in a galaxy far, far away."
         while sw["next"] != nil
-            print ". "
+            print "."
             sw["results"].each { |v| Character.new(v["name"], v["birth_year"], v["homeworld"], v["films"], v["url"]) }
             sw = get_data(sw["next"])
         end
@@ -25,10 +26,9 @@ class API
     end
 
     def compile_others
-        print "\n\n\nAlmost there."
         sw = get_data("https://swapi.dev/api/planets/")
         while sw["next"] != nil
-            print ". "
+            print "."
             sw["results"].each { |v| Planet.new(v["name"], v["population"], v["residents"], v["url"]) }
             sw = get_data(sw["next"])
         end

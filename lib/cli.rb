@@ -2,9 +2,6 @@ class CLI
 
     def initialize
         clear_scr
-        puts "Welcome to Star Wars CLI"
-        puts "Please wait while your data is compiled for optimal viewing pleasure (this will take a while)..."
-        print "\n\n\nLoading "
     end
 
     def clear_scr
@@ -13,6 +10,7 @@ class CLI
 
     def call(error=false)
         clear_scr
+        puts "Welcome to the Star Wars CLI gem! Follow the command prompts to learn more!"
         puts "!!!You must enter a valid selection!!!" if error == true
         puts "Which would you like to know more about? (Type exit to quit)"
         puts "1. Characters"
@@ -109,6 +107,7 @@ class CLI
         puts "Title: #{film.name}"
         puts "Director: #{film.director}"
         puts "\n\nOpening Crawl\n\n#{film.crawl}"
+        puts "\n\n\nEnter any value to go back to the main menu."
         gets.chomp
         call
     end

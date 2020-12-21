@@ -5,11 +5,11 @@ class Character
     attr_accessor :name, :dob, :homeworld, :films, :id
 
     def initialize(name, dob, homeworld, films, id)
-        @name = name
-        @dob = dob
-        @homeworld = homeworld
-        @films = films
-        @id = id
+        self.name = name
+        self.dob = dob
+        self.homeworld = homeworld
+        self.films = films
+        self.id = id
         @@all << self
     end
 

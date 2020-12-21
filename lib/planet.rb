@@ -5,10 +5,10 @@ class Planet
     attr_accessor :name, :population, :id, :residents
 
     def initialize(name, population, residents, id)
-        @name = name
-        @population = population
-        @id = id
-        @residents = residents
+        self.name = name
+        self.population = population
+        self.id = id
+        self.residents = residents
         @@all << self
     end
 
